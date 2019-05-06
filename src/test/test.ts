@@ -14,5 +14,3 @@ new Schedular()
     idleCallback: () => console.log('common priority')
   })
   .execute()
-
-  new Schedular().push

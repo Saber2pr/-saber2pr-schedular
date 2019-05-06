@@ -2,7 +2,7 @@
  * @Author: saber2pr
  * @Date: 2019-05-06 10:52:29
  * @Last Modified by: saber2pr
- * @Last Modified time: 2019-05-06 12:21:09
+ * @Last Modified time: 2019-05-06 12:35:21
  */
 export interface Task {
   expirationTime: number
@@ -10,9 +10,9 @@ export interface Task {
 }
 
 export class Schedular {
-  constructor()
-  constructor(options: IdleOptions)
-  constructor(private readonly options?: IdleOptions) {}
+  public constructor()
+  public constructor(options: IdleOptions)
+  public constructor(private readonly options?: IdleOptions) {}
   private readonly schedule: Task[] = []
   private handle: number
 

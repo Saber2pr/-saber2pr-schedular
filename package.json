@@ -12,6 +12,10 @@
     "lib/core/*",
     "lib/index.*"
   ],
+  "keywords": [
+    "requestIdleCallback",
+    "schedular"
+  ],
   "main": "./lib/index.js",
   "scripts": {
     "test": "node ./lib/test/test.js",

@@ -4,24 +4,24 @@
  * @Last Modified by: saber2pr
  * @Last Modified time: 2019-05-06 10:57:55
  */
-declare interface IdleDeadline {
+export interface IdleDeadline {
   readonly didTimeout: boolean
   timeRemaining(): number
 }
 
-declare interface IdleOptions {
+export interface IdleOptions {
   timeout: number
 }
 
-declare type IdleCallback = {
+export type IdleCallback = {
   (deadline: IdleDeadline): void
 }
 
-declare function requestIdleCallback(callback: IdleCallback): number
+export function requestIdleCallback(callback: IdleCallback): number
 
-declare function requestIdleCallback(
+export function requestIdleCallback(
   callback: IdleCallback,
   options: IdleOptions
 ): number
 
-declare function cancelIdleCallback(handle: number): void
+export function cancelIdleCallback(handle: number): void

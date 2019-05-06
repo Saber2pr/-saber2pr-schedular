@@ -1,9 +1,16 @@
 /*
  * @Author: saber2pr
- * @Date: 2019-05-06 10:52:29
- * @Last Modified by: saber2pr
- * @Last Modified time: 2019-05-06 12:35:21
+ * @Date: 2019-05-06 18:58:57
+ * @Last Modified by:   saber2pr
+ * @Last Modified time: 2019-05-06 18:58:57
  */
+import {
+  IdleOptions,
+  IdleCallback,
+  requestIdleCallback,
+  cancelIdleCallback
+} from '../shim/requestIdleCallback'
+
 export interface Task {
   expirationTime: number
   idleCallback: (timeRemain: number) => any

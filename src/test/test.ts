@@ -1,4 +1,4 @@
-import { Schedular } from '../core/saber-schedular'
+import { Schedular } from '..'
 
 new Schedular()
   .push({

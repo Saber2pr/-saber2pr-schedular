@@ -1,15 +1,10 @@
 /*
  * @Author: saber2pr
  * @Date: 2019-05-06 18:58:57
- * @Last Modified by:   saber2pr
- * @Last Modified time: 2019-05-06 18:58:57
+ * @Last Modified by: saber2pr
+ * @Last Modified time: 2019-05-06 19:30:53
  */
-import {
-  IdleOptions,
-  IdleCallback,
-  requestIdleCallback,
-  cancelIdleCallback
-} from '../shim/requestIdleCallback'
+/// <reference path="../shim/requestIdleCallback.ts" />
 
 export interface Task {
   expirationTime: number

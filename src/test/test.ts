@@ -7,7 +7,7 @@ new Schedular()
   })
   .push({
     expirationTime: 0,
-    idleCallback: () => console.log('hight priority')
+    idleCallback: () => console.log('high priority')
   })
   .push({
     expirationTime: 25,

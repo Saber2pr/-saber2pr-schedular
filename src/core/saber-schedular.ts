@@ -13,22 +13,22 @@ export class Schedular {
   public constructor()
   public constructor(options: IdleOptions)
   public constructor(private readonly options?: IdleOptions) {}
-  private readonly schedule: Task[] = []
+  private readonly taskQueue: Task[] = []
   private handle: number
 
   public push(...fn: Task[]) {
-    this.schedule.push(...fn)
+    this.taskQueue.push(...fn)
     return this
   }
 
   private idleCallback: IdleCallback = async deadline => {
-    const task = this.schedule.shift()
+    const task = this.taskQueue.shift()
     if (!task) return
 
     if (deadline.timeRemaining() > task.expirationTime || deadline.didTimeout) {
       await task.idleCallback(deadline.timeRemaining())
     } else {
-      this.schedule.push(task)
+      this.taskQueue.push(task)
     }
 
     requestIdleCallback(this.idleCallback, this.options)

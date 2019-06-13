@@ -20,43 +20,34 @@ export const isIdleCallback = (fn: any): fn is Task['idleCallback'] =>
 export class Schedular {
   public constructor()
   public constructor(options: IdleOptions)
-  public constructor(private readonly options?: IdleOptions) {}
+  public constructor(private readonly options?: IdleOptions) {
+    requestIdleCallback(this.idleCallback, this.options)
+  }
+
   private readonly taskQueue: Task[] = []
-  private handle: number
 
   public push(...fn: Array<Task | Task['idleCallback']>): this {
     for (const f of fn) {
-      isTask(f)
-        ? this.taskQueue.push(f)
-        : isIdleCallback(f)
-        ? this.taskQueue.push({
-            expirationTime: 0,
-            idleCallback: f
-          })
-        : null
+      if (isTask(f)) this.taskQueue.push(f)
+
+      if (isIdleCallback(f)) {
+        this.taskQueue.push({ expirationTime: 0, idleCallback: f })
+      }
     }
 
     return this
   }
 
-  private idleCallback: IdleCallback = async deadline => {
+  private idleCallback: IdleCallback = deadline => {
     const task = this.taskQueue.shift()
     if (!task) return
 
     if (deadline.timeRemaining() > task.expirationTime || deadline.didTimeout) {
-      await task.idleCallback(deadline.timeRemaining())
+      task.idleCallback(deadline.timeRemaining())
     } else {
       this.taskQueue.push(task)
     }
 
     requestIdleCallback(this.idleCallback, this.options)
-  }
-
-  public execute(): void {
-    this.handle = requestIdleCallback(this.idleCallback, this.options)
-  }
-
-  public cancel() {
-    cancelIdleCallback(this.handle)
   }
 }

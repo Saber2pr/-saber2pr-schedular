@@ -1,5 +1,5 @@
-import { Schedular } from './core/saber-schedular';
+import { Schedular } from './core'
 
-export * from './core/saber-schedular'
+export * from './core'
 
-export default new Schedular()
+export default Schedular

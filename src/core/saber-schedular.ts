@@ -11,6 +11,12 @@ export interface Task {
   idleCallback: (timeRemain: number) => any
 }
 
+export const isTask = (obj: any): obj is Task =>
+  ['expirationTime', 'idleCallback'].every(i => typeof obj[i] !== 'undefined')
+
+export const isIdleCallback = (fn: any): fn is Task['idleCallback'] =>
+  typeof fn === 'function'
+
 export class Schedular {
   public constructor()
   public constructor(options: IdleOptions)
@@ -18,8 +24,18 @@ export class Schedular {
   private readonly taskQueue: Task[] = []
   private handle: number
 
-  public push(...fn: Task[]) {
-    this.taskQueue.push(...fn)
+  public push(...fn: Array<Task | Task['idleCallback']>): this {
+    for (const f of fn) {
+      isTask(f)
+        ? this.taskQueue.push(f)
+        : isIdleCallback(f)
+        ? this.taskQueue.push({
+            expirationTime: 0,
+            idleCallback: f
+          })
+        : null
+    }
+
     return this
   }
 

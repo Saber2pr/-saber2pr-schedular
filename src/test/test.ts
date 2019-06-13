@@ -1,4 +1,4 @@
-import { Schedular } from '..'
+import Sch, { Schedular } from '..'
 
 new Schedular()
   .push({

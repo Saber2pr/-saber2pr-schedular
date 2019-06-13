@@ -1,6 +1,6 @@
 {
   "name": "@saber2pr/schedular",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "> 基于 requestIdleCallback 的优先级调度",
   "repository": {
     "type": "git",
